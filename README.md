@@ -1,70 +1,42 @@
-# Getting Started with Create React App
+# 프로젝트명
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 소개
 
-## Available Scripts
+> 퀴즈를 풀고, 오답을 확인 할 수 있는 간단한 퀴즈 풀이 앱입니다.
+> [퀴즈풀이 앱 열기](https://0-rok.github.io/result)
 
-In the project directory, you can run:
+## 요구사항 구현 현황
 
-### `npm start`
+1. ### 요구사항 ✅
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- 사용자는 '퀴즈 풀기' 버튼을 클릭하여 퀴즈 풀기를 시작할 수 있다.
+- 사용자는 문항에 대한 답안을 4개 보기 중에 선택할 수 있다.
+- 사용자는 답안을 선택하면 다음 문항을 볼 수 있다.
+  - 답안 선택 후 다음 문항 버튼을 볼 수 있다.
+  - 답안이 맞았는지 틀렸는지 바로 알 수 있다.
+  - 다음 문항 버튼을 클릭하여 다음 문항으로 이동할 수 있다.
+- 모든 문항을 다 풀면 사용자는 다음과 같은 결과 정보를 볼 수 있다.
+  - 퀴즈를 마칠 때까지 소요된 시간
+  - 정답 개수
+  - 오답수
+  - 정 오답에 대한 비율을 차트로 표기
+- 오답 노트 기능
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+2. ### 테스트 ❌
 
-### `npm test`
+- 주요 비즈니스 로직과 컴포넌트에 대한 단위 테스트를 필수로 작성해 주세요.
+- (테스트 대상으로 선정한 이유를 README에 함께 작성해 주셔도 좋습니다.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 개발 환경 패키지 설정
 
-### `npm run build`
+- yarn
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  ```sh
+  yarn
+  ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- npm
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  ```sh
+  npm install
+  ```
