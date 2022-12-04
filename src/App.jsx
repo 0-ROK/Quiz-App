@@ -3,35 +3,33 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import StartPage from "./pages/StartPage";
 import QuizPage from "./pages/QuizPage";
 import ResultPage from "./pages/ResultPage";
-import { RecoilRoot } from "recoil";
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
+import { useRecoilState } from "recoil";
+import ReviewPage from "./pages/ReviewPage";
+import { pageState } from "./states/recoilPageState";
+import { PageNumber } from "./enum/PageNumber";
 
 function App() {
-  const queryClient = new QueryClient();
+  const [step, setStep] = useRecoilState(pageState);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <RecoilRoot>
-        <BrowserRouter>
-          <Routes>
-            <Route path="start_page">
-              <Route path="" element={<StartPage />} />
-              <Route path="*" element={<Navigate to="" replace />} />
-            </Route>
-            <Route path="quiz" element={<QuizPage />} />
-            <Route path="result" element={<ResultPage />} />
-            <Route path="" element={<Navigate to="start_page" replace />} />
-            <Route path="*" element={<Navigate to="start_page" replace />} />
-          </Routes>
-        </BrowserRouter>
-      </RecoilRoot>
-    </QueryClientProvider>
+    <BrowserRouter>
+      <Routes>
+        {step >= PageNumber.START_PAGE && (
+          <Route path="start_page" element={<StartPage />} />
+        )}
+        {step === PageNumber.QUIZ_PAGE && (
+          <Route path="quiz" element={<QuizPage />} />
+        )}
+        {step === PageNumber.RESULT_PAGE && (
+          <Route path="result" element={<ResultPage />} />
+        )}
+        {step === PageNumber.REVIEW_PAGE && (
+          <Route path="review" element={<ReviewPage />} />
+        )}
+        <Route path="" element={<Navigate to="start_page" replace />} />
+        <Route path="*" element={<Navigate to="start_page" replace />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -10,22 +10,17 @@ import {
   Skeleton,
 } from "@mui/material";
 import React, { useState } from "react";
+import { useRecoilValue } from "recoil";
+import { resolvedQuizState } from "../states/recoilResolvedQuizState";
 
-const QuizForm = ({ quiz, skipQuiz, submitQuiz }) => {
-  const [selectedAnswer, setSelectedAnswer] = useState();
+const QuizReviewForm = ({ quiz, skipQuiz, submitQuiz, count, setCount }) => {
+  const [, setSelectedAnswer] = useState();
+  const resolvedQuiz = useRecoilValue(resolvedQuizState);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     submitQuiz(e.target.answer.value);
-
-    setSelectedAnswer(false);
-  };
-
-  const handleSkip = (e) => {
-    e.preventDefault();
-
-    skipQuiz();
 
     setSelectedAnswer(false);
   };
@@ -71,6 +66,7 @@ const QuizForm = ({ quiz, skipQuiz, submitQuiz }) => {
                 aria-labelledby="demo-radio-buttons-group-label"
                 name="answer"
               >
+                {console.log(quiz)}
                 {quiz ? (
                   quiz?.answers?.map((answer, key) => (
                     <FormControlLabel
@@ -78,7 +74,13 @@ const QuizForm = ({ quiz, skipQuiz, submitQuiz }) => {
                       value={answer}
                       control={<Radio />}
                       onChange={(e) => setSelectedAnswer(answer)}
-                      label={answer}
+                      label={`${answer}${
+                        answer === quiz.selected_answer
+                          ? " ❌ (your Answer)"
+                          : answer === quiz.correct_answer
+                          ? " ✅ (correct Answer)"
+                          : ""
+                      }`}
                     />
                   ))
                 ) : (
@@ -119,19 +121,25 @@ const QuizForm = ({ quiz, skipQuiz, submitQuiz }) => {
         <CardActions>
           <Button
             variant="contained"
-            type="submit"
-            disabled={!quiz || !selectedAnswer}
+            type="button"
+            disabled={!quiz || !count}
+            onClick={() => {
+              setCount((count) => count - 1);
+            }}
           >
-            submit!
+            이전
           </Button>
           <Button
             variant="contained"
             type="button"
             color="secondary"
-            disabled={!quiz}
-            onClick={(e) => handleSkip(e)}
+            disabled={
+              !quiz ||
+              count + 1 >= resolvedQuiz.filter((quiz) => !quiz.result).length
+            }
+            onClick={() => setCount((count) => count + 1)}
           >
-            skip😅
+            다음
           </Button>
         </CardActions>
       </form>
@@ -139,4 +147,4 @@ const QuizForm = ({ quiz, skipQuiz, submitQuiz }) => {
   );
 };
 
-export default QuizForm;
+export default QuizReviewForm;

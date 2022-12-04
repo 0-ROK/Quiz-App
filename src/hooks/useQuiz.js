@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { pageState } from "../states/recoilPageState";
 import { resolvedQuizState } from "../states/recoilResolvedQuizState";
 
 const axios = require("axios").default;
@@ -17,6 +18,7 @@ export default function useQuiz(params = { maxCount: 10, type: "multiple" }) {
   const [resolvedQuiz, setResolvedQuiz] = useRecoilState(resolvedQuizState);
   const [quiz, setQuiz] = useState();
   const [count, setCount] = useState(0);
+  const setPage = useSetRecoilState(pageState);
 
   const fetchQuiz = async () => {
     setQuiz(null);
@@ -28,6 +30,7 @@ export default function useQuiz(params = { maxCount: 10, type: "multiple" }) {
     freshQuiz.answers = [...response.data.results[0].incorrect_answers];
     freshQuiz.answers.push(response.data.results[0].correct_answer);
     freshQuiz.answers.sort();
+    freshQuiz.question = `${resolvedQuiz.length + 1}. ${freshQuiz.question}`;
 
     setQuiz(freshQuiz);
     setCount(count + 1);
@@ -37,9 +40,7 @@ export default function useQuiz(params = { maxCount: 10, type: "multiple" }) {
   async function submitQuiz(answer) {
     try {
       console.log(count);
-      if (count >= params.maxCount) {
-        navigate("/result");
-      } else {
+      if (count <= params.maxCount)
         setResolvedQuiz([
           ...resolvedQuiz,
           {
@@ -48,18 +49,18 @@ export default function useQuiz(params = { maxCount: 10, type: "multiple" }) {
             selected_answer: answer,
           },
         ]);
+      if (count >= params.maxCount) {
+        setPage((page) => page + 1, navigate("/result"));
       }
     } catch (error) {
       console.error(error);
     }
   }
 
-  async function skipQuiz(answer) {
+  async function skipQuiz() {
     try {
       console.log(count);
-      if (count >= params.maxCount) {
-        navigate("/result");
-      } else {
+      if (count <= params.maxCount)
         setResolvedQuiz([
           ...resolvedQuiz,
           {
@@ -68,6 +69,8 @@ export default function useQuiz(params = { maxCount: 10, type: "multiple" }) {
             selected_answer: null,
           },
         ]);
+      if (count >= params.maxCount) {
+        setPage((page) => page + 1, navigate("/result"));
       }
     } catch (error) {
       console.error(error);
