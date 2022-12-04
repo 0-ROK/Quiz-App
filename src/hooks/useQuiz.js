@@ -6,6 +6,8 @@ import { resolvedQuizState } from "../states/recoilResolvedQuizState";
 
 const axios = require("axios").default;
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 /**
  *
  * @param {object} params
@@ -22,7 +24,7 @@ export default function useQuiz(params = { maxCount: 10, type: "multiple" }) {
 
   const fetchQuiz = async () => {
     setQuiz(null);
-    const response = await axios.get("", {
+    const response = await axios.get("https://opentdb.com/api.php", {
       params: { ...params, amount: 1 },
     });
 
