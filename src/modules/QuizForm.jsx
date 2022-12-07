@@ -12,12 +12,13 @@ import {
 import React, { useState } from "react";
 
 const QuizForm = ({ quiz, skipQuiz, submitQuiz }) => {
+  console.log(quiz);
   const [selectedAnswer, setSelectedAnswer] = useState();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    submitQuiz(e.target.answer.value);
+    submitQuiz && submitQuiz(e.target.answer.value);
 
     setSelectedAnswer(false);
   };
@@ -25,7 +26,7 @@ const QuizForm = ({ quiz, skipQuiz, submitQuiz }) => {
   const handleSkip = (e) => {
     e.preventDefault();
 
-    skipQuiz();
+    skipQuiz && skipQuiz();
 
     setSelectedAnswer(false);
   };
@@ -76,10 +77,13 @@ const QuizForm = ({ quiz, skipQuiz, submitQuiz }) => {
                     <FormControlLabel
                       key={key}
                       value={answer}
+                      checked={selectedAnswer === answer}
                       control={<Radio />}
                       onChange={(e) => setSelectedAnswer(answer)}
                       label={answer}
-                    />
+                    >
+                      {/* {answer} */}
+                    </FormControlLabel>
                   ))
                 ) : (
                   <>

@@ -13,21 +13,12 @@ import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { resolvedQuizState } from "../states/recoilResolvedQuizState";
 
-const QuizReviewForm = ({ quiz, skipQuiz, submitQuiz, count, setCount }) => {
+const QuizReviewForm = ({ quiz, count = 0, setCount, maxCount = 10 }) => {
   const [, setSelectedAnswer] = useState();
-  const resolvedQuiz = useRecoilValue(resolvedQuizState);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    submitQuiz(e.target.answer.value);
-
-    setSelectedAnswer(false);
-  };
 
   return (
     <Card>
-      <form onSubmit={handleSubmit}>
+      <form>
         <CardHeader
           title={
             quiz ? (
@@ -66,7 +57,6 @@ const QuizReviewForm = ({ quiz, skipQuiz, submitQuiz, count, setCount }) => {
                 aria-labelledby="demo-radio-buttons-group-label"
                 name="answer"
               >
-                {console.log(quiz)}
                 {quiz ? (
                   quiz?.answers?.map((answer, key) => (
                     <FormControlLabel
@@ -133,10 +123,7 @@ const QuizReviewForm = ({ quiz, skipQuiz, submitQuiz, count, setCount }) => {
             variant="contained"
             type="button"
             color="secondary"
-            disabled={
-              !quiz ||
-              count + 1 >= resolvedQuiz.filter((quiz) => !quiz.result).length
-            }
+            disabled={!quiz || count + 1 >= maxCount}
             onClick={() => setCount((count) => count + 1)}
           >
             다음
