@@ -1,30 +1,25 @@
 import { Button } from "@mui/material";
 import React from "react";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { useNavigate } from "react-router";
 import { useRecoilValue, useSetRecoilState } from "recoil";
+import { Pie } from "react-chartjs-2";
 import { pageState } from "../states/recoilPageState";
 import { resolvedQuizState } from "../states/recoilResolvedQuizState";
 import { timerState } from "../states/recoilTimerState";
-import { Pie } from "react-chartjs-2";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import ResultInfo from "../modules/ResultInfo";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const ResultPage = () => {
   const navigate = useNavigate();
   const resolvedQuiz = useRecoilValue(resolvedQuizState);
-  const time = useRecoilValue(timerState);
+
   const setPage = useSetRecoilState(pageState);
   return (
     <div className="App">
       <div className="App-header">
-        <p>{`총 ${time}초가 걸렸어요!`}</p>
-        <span>{`무려 ${
-          resolvedQuiz.filter((quiz) => quiz.result).length
-        }문제를 맞췄어요! 🥳`}</span>
-        <span>{`아쉽게도, ${
-          resolvedQuiz.filter((quiz) => !quiz.result).length
-        }문제를 틀렸어요! 🥺`}</span>
+        <ResultInfo />
         <br />
         <div width={300} height={300}>
           <Pie
@@ -61,21 +56,6 @@ const ResultPage = () => {
             }}
           />
         </div>
-        {/* <RadialChart
-          data={[
-            {
-              angle: resolvedQuiz.filter((quiz) => quiz.result).length,
-              label: "정답",
-            },
-            {
-              angle: resolvedQuiz.filter((quiz) => !quiz.result).length,
-              label: "오답",
-            },
-          ]}
-          colorType="category"
-          width={300}
-          height={300}
-        /> */}
         <br />
         {resolvedQuiz.filter((quiz) => !quiz.result).length ? (
           <Button

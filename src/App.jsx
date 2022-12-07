@@ -7,16 +7,13 @@ import { useRecoilState } from "recoil";
 import ReviewPage from "./pages/ReviewPage";
 import { pageState } from "./states/recoilPageState";
 import { PageNumber } from "./enum/PageNumber";
-
 function App() {
   const [step, setStep] = useRecoilState(pageState);
 
   return (
     <BrowserRouter>
       <Routes>
-        {step >= PageNumber.START_PAGE && (
-          <Route path="start_page" element={<StartPage />} />
-        )}
+        <Route path="start_page" element={<StartPage />} />
         {step === PageNumber.QUIZ_PAGE && (
           <Route path="quiz" element={<QuizPage />} />
         )}

@@ -20,10 +20,9 @@ const ReviewPage = () => {
         <div style={{ width: "80%", height: "40%" }}>
           <QuizReviewForm
             quiz={resolvedQuiz.filter((quiz) => !quiz.result)[count]}
-            skipQuiz={skipQuiz}
-            submitQuiz={submitQuiz}
             count={count}
             setCount={setCount}
+            maxCount={resolvedQuiz.filter((quiz) => !quiz.result).length}
             type="review"
             width="100%"
             height="100%"
