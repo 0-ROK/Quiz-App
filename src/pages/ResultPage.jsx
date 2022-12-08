@@ -6,7 +6,6 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { Pie } from "react-chartjs-2";
 import { pageState } from "../states/recoilPageState";
 import { resolvedQuizState } from "../states/recoilResolvedQuizState";
-import { timerState } from "../states/recoilTimerState";
 import ResultInfo from "../modules/ResultInfo";
 
 ChartJS.register(ArcElement, Tooltip, Legend);

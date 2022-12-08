@@ -1,4 +1,4 @@
-import { atom, selector } from "recoil";
+import { atom, selector, useRecoilValue } from "recoil";
 
 export const resolvedQuizState = atom({
   key: "resolvedQuiz",
@@ -26,3 +26,8 @@ export const correctRatioState = selector({
     // }
   },
 });
+
+export const useRecoilQuizValue = () => {
+  const value = useRecoilValue(resolvedQuizState);
+  return value;
+};

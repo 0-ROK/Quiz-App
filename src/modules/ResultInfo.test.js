@@ -1,9 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { RecoilRoot } from "recoil";
-import QuizPage from "../pages/QuizPage";
 import ResultInfo from "./ResultInfo";
 import { BrowserRouter as Router } from "react-router-dom";
-import { act } from "react-dom/test-utils";
 
 describe("<ResultInfo/>", () => {
   it("is quizform snapshot", () => {

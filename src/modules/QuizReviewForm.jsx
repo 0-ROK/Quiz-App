@@ -10,8 +10,6 @@ import {
   Skeleton,
 } from "@mui/material";
 import React, { useState } from "react";
-import { useRecoilValue } from "recoil";
-import { resolvedQuizState } from "../states/recoilResolvedQuizState";
 
 const QuizReviewForm = ({ quiz, count = 0, setCount, maxCount = 10 }) => {
   const [, setSelectedAnswer] = useState();
