@@ -48,12 +48,7 @@ describe("<QuizForm/>", () => {
       </RecoilRoot>
     );
 
-    if (
-      screen.queryByText("easy") ||
-      screen.queryByText("medium") ||
-      screen.queryByText("hard")
-    ) {
-    } else throw Error();
+    screen.getByText(/\b(:?easy|medium|hard)\b/);
   });
 
   it("서로 다른 보기 4개가 출력된다.", () => {

@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<QuizPage/> is quizpage snapshot 1`] = `
+<div>
+  <div>
+    <div
+      class="App-header"
+    >
+      <span>
+        진행도 : 1/10
+      </span>
+      <span />
+      <span>
+        소요시간 : 0초
+      </span>
+      <br />
+      <div
+        style="width: 80%; height: 40%;"
+      >
+        <div
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-bhp9pd-MuiPaper-root-MuiCard-root"
+        >
+          <form>
+            <div
+              class="MuiCardHeader-root css-185gdzj-MuiCardHeader-root"
+            >
+              <div
+                class="MuiCardHeader-content css-1qbkelo-MuiCardHeader-content"
+              >
+                <span
+                  class="MuiTypography-root MuiTypography-h5 MuiCardHeader-title css-1qvr50w-MuiTypography-root"
+                >
+                  <span
+                    class="MuiSkeleton-root MuiSkeleton-text MuiSkeleton-wave css-1etr2k8-MuiSkeleton-root"
+                    style="width: 80%; margin-bottom: 6px;"
+                  />
+                </span>
+                <span
+                  class="MuiTypography-root MuiTypography-body1 MuiCardHeader-subheader css-nrdprl-MuiTypography-root"
+                >
+                  <span
+                    class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-wave css-1kcnzpi-MuiSkeleton-root"
+                    style="width: 2%; height: 10px;"
+                  />
+                </span>
+              </div>
+            </div>
+            <div
+              class="MuiCardContent-root css-46bh2p-MuiCardContent-root"
+            >
+              <div>
+                <fieldset>
+                  <legend>
+                    loading...
+                  </legend>
+                  <div
+                    aria-labelledby="demo-radio-buttons-group-label"
+                    class="MuiFormGroup-root css-dmmspl-MuiFormGroup-root"
+                    role="radiogroup"
+                  >
+                    <span
+                      class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-wave css-1kcnzpi-MuiSkeleton-root"
+                      style="width: 20%; margin-bottom: 10px;"
+                    />
+                    <span
+                      class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-wave css-1kcnzpi-MuiSkeleton-root"
+                      style="width: 20%; margin-bottom: 10px;"
+                    />
+                    <span
+                      class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-wave css-1kcnzpi-MuiSkeleton-root"
+                      style="width: 20%; margin-bottom: 10px;"
+                    />
+                    <span
+                      class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-wave css-1kcnzpi-MuiSkeleton-root"
+                      style="width: 20%; margin-bottom: 10px;"
+                    />
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+            <div
+              class="MuiCardActions-root MuiCardActions-spacing css-1t6e9jv-MuiCardActions-root"
+            >
+              <button
+                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium Mui-disabled MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-sghohy-MuiButtonBase-root-MuiButton-root"
+                disabled=""
+                tabindex="-1"
+                type="submit"
+              >
+                submit!
+              </button>
+              <button
+                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium Mui-disabled MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium css-zcbmsk-MuiButtonBase-root-MuiButton-root"
+                disabled=""
+                tabindex="-1"
+                type="button"
+              >
+                skip😅
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
