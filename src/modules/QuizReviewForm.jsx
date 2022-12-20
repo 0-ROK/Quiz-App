@@ -1,142 +1,81 @@
 import {
-  Button,
   Card,
-  CardActions,
   CardContent,
   CardHeader,
+  Divider,
   FormControlLabel,
   Radio,
   RadioGroup,
-  Skeleton,
 } from "@mui/material";
 import React from "react";
 
-const QuizReviewForm = ({ quiz, count = 0, setCount, maxCount = 10 }) => {
+const QuizReviewForm = ({ quiz }) => {
   return (
     <Card>
-      <CardHeader
-        title={
-          quiz ? (
-            <div dangerouslySetInnerHTML={{ __html: quiz?.question }} />
-          ) : (
-            <Skeleton
-              animation="wave"
-              width="80%"
-              height="10"
-              style={{ marginBottom: 6 }}
-            />
-          )
-        }
-        subheader={
-          quiz ? (
-            quiz?.difficulty
-          ) : (
-            <Skeleton
-              animation="wave"
-              variant="rectangular"
-              height={10}
-              width="2%"
-            />
-          )
-        }
-      />
-      <CardContent>
-        <div>
-          <fieldset>
-            {quiz ? (
-              <legend>Select a answer!</legend>
-            ) : (
-              <legend>loading...</legend>
-            )}
-            <RadioGroup
-              aria-labelledby="demo-radio-buttons-group-label"
-              name="answer"
-            >
-              {quiz ? (
-                quiz?.answers?.map((answer, key) => (
-                  <FormControlLabel
-                    disabled={answer !== quiz?.correct_answer}
-                    checked={answer === quiz?.correct_answer}
-                    key={key}
-                    value={answer}
-                    control={<Radio />}
-                    label={
-                      <div
-                        style={{
-                          color:
-                            answer === quiz?.correct_answer
-                              ? "blue"
-                              : answer === quiz?.selected_answer && "red",
-                        }}
-                        dangerouslySetInnerHTML={{
-                          __html: `${answer}${
-                            answer === quiz.selected_answer
-                              ? " ❌"
-                              : answer === quiz.correct_answer
-                              ? " ✅"
-                              : ""
-                          }`,
-                        }}
-                      />
-                    }
-                  />
-                ))
-              ) : (
-                <>
-                  <Skeleton
-                    animation="wave"
-                    variant="rectangular"
-                    width="20%"
-                    style={{ marginBottom: 10 }}
-                  />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <h2>오답노트</h2>
+        <span>{`틀린 문제 : ${quiz.length}개`}</span>
+      </div>
+      <Divider />
+      {quiz.map((content) => (
+        <>
+          <CardHeader
+            title={
+              <div dangerouslySetInnerHTML={{ __html: content?.question }} />
+            }
+            subheader={content?.difficulty}
+          />
+          <CardContent>
+            <div>
+              <fieldset>
+                <legend>Check the answers!</legend>
 
-                  <Skeleton
-                    animation="wave"
-                    variant="rectangular"
-                    width="20%"
-                    style={{ marginBottom: 10 }}
-                  />
-
-                  <Skeleton
-                    animation="wave"
-                    variant="rectangular"
-                    width="20%"
-                    style={{ marginBottom: 10 }}
-                  />
-
-                  <Skeleton
-                    animation="wave"
-                    variant="rectangular"
-                    width="20%"
-                    style={{ marginBottom: 10 }}
-                  />
-                </>
-              )}
-            </RadioGroup>
-          </fieldset>
-        </div>
-      </CardContent>
-      <CardActions>
-        <Button
-          variant="contained"
-          type="button"
-          disabled={!quiz || !count}
-          onClick={() => {
-            setCount((count) => count - 1);
-          }}
-        >
-          이전
-        </Button>
-        <Button
-          variant="contained"
-          type="button"
-          color="secondary"
-          disabled={!quiz || count + 1 >= maxCount}
-          onClick={() => setCount((count) => count + 1)}
-        >
-          다음
-        </Button>
-      </CardActions>
+                <RadioGroup
+                  aria-labelledby="demo-radio-buttons-group-label"
+                  name="answer"
+                >
+                  {content?.answers?.map((answer, key) => (
+                    <FormControlLabel
+                      disabled={answer !== content?.correct_answer}
+                      checked={answer === content?.correct_answer}
+                      key={key}
+                      value={answer}
+                      control={<Radio />}
+                      label={
+                        <div
+                          style={{
+                            color:
+                              answer === content?.correct_answer
+                                ? "blue"
+                                : answer === content?.selected_answer && "red",
+                          }}
+                          dangerouslySetInnerHTML={{
+                            __html: `${answer}${
+                              answer === content.selected_answer
+                                ? " ❌"
+                                : answer === content.correct_answer
+                                ? " ✅"
+                                : ""
+                            }`,
+                          }}
+                        />
+                      }
+                    />
+                  ))}
+                </RadioGroup>
+              </fieldset>
+            </div>
+          </CardContent>
+          <Divider />
+        </>
+      ))}
     </Card>
   );
 };
