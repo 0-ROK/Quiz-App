@@ -9,12 +9,9 @@ import {
   RadioGroup,
   Skeleton,
 } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 
 const QuizReviewForm = ({ quiz, count = 0, setCount, maxCount = 10 }) => {
-  // setSelectedAnswer만 쓴 이유 생각해보기
-  const [, setSelectedAnswer] = useState();
-
   return (
     <Card>
       <form>
@@ -59,18 +56,25 @@ const QuizReviewForm = ({ quiz, count = 0, setCount, maxCount = 10 }) => {
                 {quiz ? (
                   quiz?.answers?.map((answer, key) => (
                     <FormControlLabel
+                      disabled={answer !== quiz?.correct_answer}
+                      checked={answer === quiz?.correct_answer}
                       key={key}
                       value={answer}
                       control={<Radio />}
-                      onChange={(e) => setSelectedAnswer(answer)}
                       label={
                         <div
+                          style={{
+                            color:
+                              answer === quiz?.correct_answer
+                                ? "blue"
+                                : answer === quiz?.selected_answer && "red",
+                          }}
                           dangerouslySetInnerHTML={{
                             __html: `${answer}${
                               answer === quiz.selected_answer
-                                ? " ❌ (your Answer)"
+                                ? " ❌"
                                 : answer === quiz.correct_answer
-                                ? " ✅ (correct Answer)"
+                                ? " ✅"
                                 : ""
                             }`,
                           }}
