@@ -12,6 +12,7 @@ import {
 import React, { useState } from "react";
 
 const QuizReviewForm = ({ quiz, count = 0, setCount, maxCount = 10 }) => {
+  // setSelectedAnswer만 쓴 이유 생각해보기
   const [, setSelectedAnswer] = useState();
 
   return (
@@ -20,7 +21,7 @@ const QuizReviewForm = ({ quiz, count = 0, setCount, maxCount = 10 }) => {
         <CardHeader
           title={
             quiz ? (
-              quiz?.question
+              <div dangerouslySetInnerHTML={{ __html: quiz?.question }} />
             ) : (
               <Skeleton
                 animation="wave"
@@ -62,13 +63,19 @@ const QuizReviewForm = ({ quiz, count = 0, setCount, maxCount = 10 }) => {
                       value={answer}
                       control={<Radio />}
                       onChange={(e) => setSelectedAnswer(answer)}
-                      label={`${answer}${
-                        answer === quiz.selected_answer
-                          ? " ❌ (your Answer)"
-                          : answer === quiz.correct_answer
-                          ? " ✅ (correct Answer)"
-                          : ""
-                      }`}
+                      label={
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: `${answer}${
+                              answer === quiz.selected_answer
+                                ? " ❌ (your Answer)"
+                                : answer === quiz.correct_answer
+                                ? " ✅ (correct Answer)"
+                                : ""
+                            }`,
+                          }}
+                        />
+                      }
                     />
                   ))
                 ) : (

@@ -37,7 +37,9 @@ const QuizForm = ({ quiz, skipQuiz, submitQuiz }) => {
         <CardHeader
           title={
             quiz ? (
-              quiz?.question
+              <>
+                <div dangerouslySetInnerHTML={{ __html: quiz?.question }} />
+              </>
             ) : (
               <Skeleton
                 animation="wave"
@@ -80,10 +82,10 @@ const QuizForm = ({ quiz, skipQuiz, submitQuiz }) => {
                       checked={selectedAnswer === answer}
                       control={<Radio />}
                       onChange={(e) => setSelectedAnswer(answer)}
-                      label={answer}
-                    >
-                      {/* {answer} */}
-                    </FormControlLabel>
+                      label={
+                        <div dangerouslySetInnerHTML={{ __html: answer }} />
+                      }
+                    ></FormControlLabel>
                   ))
                 ) : (
                   <>

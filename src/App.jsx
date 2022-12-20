@@ -3,12 +3,12 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import StartPage from "./pages/StartPage";
 import QuizPage from "./pages/QuizPage";
 import ResultPage from "./pages/ResultPage";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import ReviewPage from "./pages/ReviewPage";
 import { pageState } from "./states/recoilPageState";
 import { PageNumber } from "./enum/PageNumber";
 function App() {
-  const [step, setStep] = useRecoilState(pageState);
+  const step = useRecoilValue(pageState);
 
   return (
     <BrowserRouter>

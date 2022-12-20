@@ -1,12 +1,10 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { pageState } from "../states/recoilPageState";
 import { resolvedQuizState } from "../states/recoilResolvedQuizState";
 
 const axios = require("axios").default;
-
-const API_URL = process.env.REACT_APP_API_URL;
 
 /**
  *
@@ -23,25 +21,28 @@ export default function useQuiz(params = { maxCount: 10, type: "multiple" }) {
   const setPage = useSetRecoilState(pageState);
 
   const fetchQuiz = async () => {
-    setQuiz(null);
-    const response = await axios.get("https://opentdb.com/api.php", {
-      params: { ...params, amount: 1 },
-    });
+    setQuiz(null); // UI 스켈레톤 표시를 위한 null 처리
+    try {
+      const response = await axios.get("https://opentdb.com/api.php", {
+        params: { ...params, amount: 1 },
+      });
 
-    const freshQuiz = response.data.results[0];
-    freshQuiz.answers = [...response.data.results[0].incorrect_answers];
-    freshQuiz.answers.push(response.data.results[0].correct_answer);
-    freshQuiz.answers.sort();
-    freshQuiz.question = `${resolvedQuiz.length + 1}. ${freshQuiz.question}`;
+      const freshQuiz = response.data.results[0];
+      freshQuiz.answers = [...response.data.results[0].incorrect_answers];
+      freshQuiz.answers.push(response.data.results[0].correct_answer);
+      freshQuiz.answers.sort();
+      freshQuiz.question = `${resolvedQuiz.length + 1}. ${freshQuiz.question}`;
 
-    setQuiz(freshQuiz);
-    setCount(count + 1);
-    return freshQuiz;
+      setQuiz(freshQuiz);
+      setCount(count + 1);
+      return freshQuiz;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   async function submitQuiz(answer) {
     try {
-      console.log(count);
       if (count <= params.maxCount)
         setResolvedQuiz([
           ...resolvedQuiz,
@@ -61,7 +62,6 @@ export default function useQuiz(params = { maxCount: 10, type: "multiple" }) {
 
   async function skipQuiz() {
     try {
-      console.log(count);
       if (count <= params.maxCount)
         setResolvedQuiz([
           ...resolvedQuiz,
@@ -84,8 +84,8 @@ export default function useQuiz(params = { maxCount: 10, type: "multiple" }) {
       fetchQuiz();
     }
     effect();
-    console.log(resolvedQuiz);
   }, [resolvedQuiz.length]);
+  useEffect(() => {}, [quiz]);
 
   return [quiz, skipQuiz, submitQuiz];
 }
